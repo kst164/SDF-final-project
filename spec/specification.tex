@@ -1,0 +1,63 @@
+\documentclass{article}
+
+\title{Online Education Management System - Specification}
+\author{Aniket Satpute \\ Govinda Rohith \\ Kartheek Tammana}
+
+\begin{document}
+
+\maketitle
+
+\section{Outline}
+\begin{enumerate}
+    \item All content is available to all students
+    \item Content is organised into subjects, topics, and subtopics that students can browse
+    \item Teachers can upload content only within subjects assigned to them, which is done by
+        admins
+    \item Students have a dashboard where they can see their current progress in different topics
+\end{enumerate}
+All educational content is organised into Topics, and all content is accessible to all students at
+all times. Students have a dashboard where they can see what topics/subtopics they are currently
+working on, and continue where they left off.
+
+\section{Topics}
+\begin{enumerate}
+    \item Each topic consists of subtopics, and content can be part of either a topic or a
+        subtopic
+    \item Content can be in the form of videos, pdfs, slides, etc
+    \item There are also automatically evaluated quizzes, which contain MCQs/integer answer
+        questions
+\end{enumerate}
+
+\section{Roles}
+
+    \subsection{Admins}
+    \begin{enumerate}
+        \item Add/delete subjects, topics, and subtopics
+        \item Add/delete content (pdfs, videos, links, etc) to any topic/subtopic
+        \item Add/delete new teachers, and assign a subject to them
+    \end{enumerate}
+
+    \subsection{Teachers}
+    \begin{enumerate}
+        \item Can add/delete content in subjects assigned to them
+        \item Can add/delete topics/subtopics in assigned subjects
+    \end{enumerate}
+
+    \subsection{Students}
+    \begin{enumerate}
+        \item Dashboard - name/username, progress status in different topics
+            \begin{enumerate}
+                \item See (and edit) your name/username
+                \item See different topics you are working on and current progress
+            \end{enumerate}
+        \item List of subjects, and Topics within them, to browse all available content
+    \end{enumerate}
+
+\section{Addon features}
+
+\begin{enumerate}
+    \item Additional courses can be made available to students by registering/paying
+    \item Manually evaluatable assignments
+\end{enumerate}
+
+\end{document}
