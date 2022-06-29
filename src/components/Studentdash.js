@@ -10,28 +10,28 @@ export default function Studentdash() {
   const [name6, setname6] = useState("list");
   const activer=(num)=>
   {
-    if(num==1)
-    {
-      setname1("list active");
-      setname2("list");
-      setname3("list");
-      setname4("list");
-      setname5("list");
-      setname6("list");
-    }
-    else if(num==2)
-    {
-      setname1("list");
-      setname2("list active");
-      setname3("list");
-      setname4("list");
-      setname5("list");
-      setname6("list");
-    }
-    else
-    {
+    // if(num==1)
+    // {
+    //   setname1("list active");
+    //   setname2("list");
+    //   setname3("list");
+    //   setname4("list");
+    //   setname5("list");
+    //   setname6("list");
+    // }
+    // else if(num==2)
+    // {
+    //   setname1("list");
+    //   setname2("list active");
+    //   setname3("list");
+    //   setname4("list");
+    //   setname5("list");
+    //   setname6("list");
+    // }
+    // else
+    // {
 
-    }
+    // }
   }
   return (
    <>
@@ -95,7 +95,7 @@ export default function Studentdash() {
 
 <div className="navigation">
   <ul>
-    <li className={name1}>
+    <li className={"list active"}>
       <a href="#" onClick={activer(1)}>
         <span className='icon'><ion-icon name="home-outline"></ion-icon></span>
         <span className='title'>Home</span>
