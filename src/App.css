@@ -796,52 +796,5 @@ background-color: white;
 /* ***************************
 for Student dash board
 *************************** */
-.how-section1{
-    margin-top:-15%;
-    padding: 10%;
-}
-.how-section1 h4{
-    color: #ffa500;
-    font-weight: bold;
-    font-size: 30px;
-}
-.how-section1 .subheading{
-    color: #3931af;
-    font-size: 20px;
-}
-.how-section1 .row
-{
-    margin-top: 10%;
-}
-.how-img 
-{
-    text-align: center;
-}
-.how-img img{
-    width: 40%;
-}
-.sampu
-{
-    position: absolute;
-    top:230%;
-    left:0%;
-}
-#section-four-wrapper
-{
-font-weight:0 ;
-}
-.newpose
-{
-    position: relative;
-    top:300%;
-    left:0%;
-}
 
-.specific
-{
-    background-color:#6610f2;
-}
-.poser
-{
-    border-radius:50%;
-}
+/* Style for vertical navbar */

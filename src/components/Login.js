@@ -69,9 +69,9 @@ export default function Login() {
             <div className="form-check d-flex justify-content-start mb-4">
               
             </div>
-
+            <Link to="/student">
             <button className="hell btn  btn-lg btn-primary  btn-block" type="submit">Login</button>
-
+            </Link>
             <hr className="my-4"/>
 
             <button className="btn btn-lg btn-block btn-primary gooo" 

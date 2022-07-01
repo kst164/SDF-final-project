@@ -1,0 +1,43 @@
+div className="navigation">
+  <ul>
+    <li className={init1}>
+      <Link to="#" onClick={() => {if(init1=="list"){setinit1("list active")}else{setinit1("list");}setinit2("list");setinit3("list");setinit4("list");setinit5("list");setinit6("list");}}>
+        <span className='icon'><ion-icon name="home-outline"></ion-icon></span>
+        <span className='title'>Home</span>
+      </Link>
+    </li>
+    <li className={init2}>
+      <Link to="#" onClick={() => {if(init2=="list"){setinit2("list active")}else{setinit2("list");}setinit1("list");setinit3("list");setinit4("list");setinit5("list");setinit6("list");}}>
+        <span className='icon'><ion-icon name="home-outline"></ion-icon></span>
+        <span className='title'>Item 2</span>
+      </Link>
+    </li>
+    <li className={init3} onClick={() => {if(init3=="list"){setinit3("list active")}else{setinit3("list");}setinit1("list");setinit2("list");setinit4("list");setinit5("list");setinit6("list");}}>
+      <Link to="#" >
+        <span className='icon'><ion-icon name="home-outline"></ion-icon></span>
+        <span className='title'>Item 3</span>
+      </Link>
+    </li>
+    <li className={init4} onClick={() => {if(init4=="list"){setinit4("list active")}else{setinit4("list");}setinit1("list");setinit2("list");setinit3("list");setinit5("list");setinit6("list");}}>
+      <Link to="#" >
+        <span className='icon'><ion-icon name="home-outline"></ion-icon></span>
+        <span className='title'>Item 4</span>
+      </Link>
+    </li>
+    <li className={init5} onClick={() => {if(init5=="list"){setinit5("list active")}else{setinit5("list");}setinit1("list");setinit2("list");setinit3("list");setinit4("list");setinit6("list");}}>
+      <Link to="#" >
+        <span className='icon'><ion-icon name="home-outline"></ion-icon></span>
+        <span className='title'>Item 5</span>
+      </Link>
+    </li>
+    <li className={init6}>
+      <Link to="#" onClick={() => {if(init6=="list"){setinit6("list active")}else{setinit6("list");}setinit1("list");setinit2("list");setinit3("list");setinit4("list");setinit5("list");}}>
+        <span className='icon'><ion-icon name="home-outline"></ion-icon></span>
+        <span className='title'>Item 6</span>
+      </Link>
+    </li>
+  </ul>
+</div>
+<div className="toggle">
+
+</div>
