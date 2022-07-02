@@ -73,11 +73,10 @@ export default function Login() {
             <button className="hell btn  btn-lg btn-primary  btn-block" type="submit">Login</button>
             </Link>
             <hr className="my-4"/>
-
+            <Link to="/faculty">
             <button className="btn btn-lg btn-block btn-primary gooo" 
               type="submit"><i className="fab fa-google me-2"></i> Sign in with google</button>
-            
-
+             </Link>
           </div>
         </div>
       </div>

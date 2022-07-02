@@ -79,7 +79,7 @@ export default function Studentdash() {
         <hr ></hr>
         <div class="list-group list-group-flush">
         <Link to="/student/subtopic" class="list-group-item "><p className="card-text">Calculus</p></Link>
-        <Link to="#" class="list-group-item "><p className="card-text">3D Geometry</p></Link>
+        <Link to="/student/subtopic" class="list-group-item "><p className="card-text">3D Geometry</p></Link>
         <Link to="#" class="list-group-item "><p className="card-text">Vectors</p></Link>
         <Link to="#" class="list-group-item "><p className="card-text">Algebra</p></Link>
         <Link to="#" class="list-group-item "><p className="card-text">Trigonometry</p></Link>

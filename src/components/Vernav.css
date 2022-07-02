@@ -53,6 +53,7 @@ text-align: center;
 {
 font-size:1.5em;
 }
+
 .navigation ul li .title
 {
 position: relative;
@@ -60,6 +61,18 @@ display: block;
 padding-left:10px;
 height: 60px;
 line-height: 60px;
+white-space: normal;
+
+}
+.navigation ul li .maintitle
+{
+position: relative;
+display: block;
+padding-left:10px;
+height: 60px;
+line-height: 60px;
+font-size:2rem;
+font-weight: 600;
 white-space: normal;
 
 }
@@ -71,4 +84,50 @@ background:#fff;
 .navigation ul li.active a
 {
 color: #333;
+}
+.subtopname
+{
+  background-color:white;
+}
+.navigation ul li.static
+{
+  transition:0.5s;
+background:#fff;
+width:80%;
+border-bottom-right-radius:20px ;
+border-top-right-radius:20px ;
+}
+.navigation ul li.static a
+{
+  justify-content:center;
+color: #333;
+cursor:default;
+}
+.linklister
+{
+  position: relative;
+  left:50%;
+}
+.conj
+{
+  position: relative;
+  left:20%;
+}
+.meal
+{
+  background-color:#6610f2;
+}
+.perv
+{
+  position: relative;
+  left:5%;
+}
+.wideg
+{
+  width: 200%;
+}
+.koke
+{
+  width: 40%;
+  font-size: 1.5em;
 }
