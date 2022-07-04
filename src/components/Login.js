@@ -187,10 +187,11 @@ export default function Login() {
       <div className="input-group">
   <span className="sizer input-group-text">Suggestion Box</span>
   <textarea  rows="10"  className="soze form-control h-25" aria-label="With textarea" placeholder='Your Suggestions here'></textarea>
-</div>
+</div>\
+<Link to="/admin">
 <div className="d-grid gap-2 col-6 mx-auto text-center">
 <button type="submit" className="btn btn-outline-primary">Submit</button>
-</div>
+</div></Link>
 </div>
   </div>
    {/* feedback begin */}

@@ -92,7 +92,6 @@ export default function Facultydash() {
         <span className='title'>Dashboard</span>
       </Link>
     </li>
-    
   </ul>
 </div>
 <div className="toggle">
