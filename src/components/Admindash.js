@@ -13,8 +13,10 @@ import Store from './Store';
 import Hw from './Hw.js';
 import Exam from './Exam.js';
 import Statistics from './Statistics.js';
+import Courseplus from './Courseplus';
+import Addfac from './Addfac';
 export default function Admindash(props) {
-  const [element,setelement]=useState(<Lecture/>)
+  const [element,setelement]=useState(<Courseplus/>)
   const [init2,setinit2]=useState("list active");
   const [init3,setinit3]=useState("list");
 
@@ -75,19 +77,18 @@ export default function Admindash(props) {
 </nav>
 </div>
 <br/><br/><br/><br/>
-{/*  insert jhere */}
 <div className="navigation">
   <ul>
-    <div className="poster my-3">
-    <li className="list active">
+    <div className="poster my-3 kap">
+    <li className="list active kap">
       <Link to="#" >
         <span className='icon'><ion-icon name="grid-outline"></ion-icon></span>
-        <span className='title'>Dashboard</span>
+        <span className='title tut'>Dashboard</span>
       </Link>
     </li>
     </div>
     <li className={init2}>
-      <Link to="#" onClick={() => {if(init2=="list"){setinit2("list active")}setinit3("list");setelement(<Lecture/>)}}>
+      <Link to="#" onClick={() => {if(init2=="list"){setinit2("list active")}setinit3("list");setelement(<Courseplus/>)}}>
         <span className='icon'><svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-folder-plus" viewBox="-2 0 25 25">
   <path d="m.5 3 .04.87a1.99 1.99 0 0 0-.342 1.311l.637 7A2 2 0 0 0 2.826 14H9v-1H2.826a1 1 0 0 1-.995-.91l-.637-7A1 1 0 0 1 2.19 4h11.62a1 1 0 0 1 .996 1.09L14.54 8h1.005l.256-2.819A2 2 0 0 0 13.81 3H9.828a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 6.172 1H2.5a2 2 0 0 0-2 2zm5.672-1a1 1 0 0 1 .707.293L7.586 3H2.19c-.24 0-.47.042-.683.12L1.5 2.98a1 1 0 0 1 1-.98h3.672z"/>
   <path d="M13.5 10a.5.5 0 0 1 .5.5V12h1.5a.5.5 0 1 1 0 1H14v1.5a.5.5 0 1 1-1 0V13h-1.5a.5.5 0 0 1 0-1H13v-1.5a.5.5 0 0 1 .5-.5z"/>
@@ -95,7 +96,7 @@ export default function Admindash(props) {
         <span className='title'>Add Courses</span>
       </Link>
     </li>
-    <li className={init3} onClick={() => {if(init3=="list"){setinit3("list active")}setinit2("list");setelement(<Store/>)}}>
+    <li className={init3} onClick={() => {if(init3=="list"){setinit3("list active")}setinit2("list");setelement(<Addfac/>)}}>
       <Link to="#" >
         <span className='icon'><svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-people-fill" viewBox="-2 0 25 25">
   <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
