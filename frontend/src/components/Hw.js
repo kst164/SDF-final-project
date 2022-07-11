@@ -28,9 +28,9 @@ export default function Hw() {
     <h5 className="card-title">Topic   :Integration</h5>
     <h5 className="card-title">Status:Pending</h5>
     <p className="card-text"><a href={link1} target="_blank"></a></p>
-    <div class="input-group mb-3">
-  <input type="file" class="form-control" id="inputGroupFile02"/>
-  <button type="button" class="btn btn-outline-danger">Submit</button>
+    <div className="input-group mb-3">
+  <input type="file" className="form-control" id="inputGroupFile02"/>
+  <button type="button" className="btn btn-outline-danger">Submit</button>
 </div>
   </div>
 </div>

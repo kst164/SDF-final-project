@@ -155,3 +155,32 @@ cursor:default;
   position: relative;
   left:6.5%;
 }
+.wake
+{
+  font-size: 1.8em
+}
+.diet
+{
+  height: 140px;
+  width: 140px;
+  border-radius:50%;
+}
+.cola
+{
+  word-wrap:break-word;
+}
+.nose
+{
+  position: relative;
+  left:10%;
+  width:75%;
+}
+.deaf
+{
+  font-size: 1.5em;
+}
+.dropdown-menu {
+  max-height:200px;
+  overflow:scroll; 
+  overflow-x:hidden;
+}

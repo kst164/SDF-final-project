@@ -25,7 +25,7 @@ export default function Lecture() {
   </div>
 </div>
 <div className="col w-75 p-3 lister card border-primary hover-shadow p-3 mb-5">
-  <h5 className="card-header bg-primary">Lecture 6</h5>
+  <h5 className="card-header bg-primary">Lecture 2</h5>
   <div className="card-body">
     <h5 className="card-title">Topic   :Integration</h5>
     <h5 className="card-title">Status: Upcoming</h5>
@@ -34,7 +34,7 @@ export default function Lecture() {
   </div>
 </div>
 <div className="col w-75 p-3 lister card border-primary hover-shadow p-3 mb-5">
-  <h5 className="card-header meal ">Lecture 1</h5>
+  <h5 className="card-header meal ">Lecture 3</h5>
   <div className="card-body">
   <h5 className="card-title">Topic   :Limits</h5>
     <h5 className="card-title">Status:Completed</h5>

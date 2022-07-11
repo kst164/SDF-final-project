@@ -10,9 +10,10 @@ import {
 } from "react-router-dom";
 import AddMaterial from './AddMaterial';
 import AddHw from './AddHw.js';
-import Exam from './Exam.js';
+import AddExam from './AddExam.js';
 import Statistics from './Statistics.js';
 import AddLecture from './AddLecture.js';
+import FacultyNav from './FacultyNav';
 export default function Mycourse() {
   const [element,setelement]=useState(<AddLecture/>)
   const [init1,setinit1]=useState("list");
@@ -23,59 +24,7 @@ export default function Mycourse() {
   return (
    <>
    <div className="dashsizer">
-   <div className="container-fluid">
-
-   <nav className="specific fixed-top navbar-dark navbar navbar-expand-lg">
-  <div className="container-fluid">
-  <Link className="navbar-brand" to="/faculty">
-      <h1>Academy</h1>
-    </Link>
-    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-      <span className="navbar-toggler-icon"></span>
-    </button>
-    <div className="collapse navbar-collapse" id="navbarNavDropdown">
-      <ul className="navbar-nav me-auto">
-      
-        <li className="nav-item">
-          <h4><Link className="nav-link active" aria-current="page" to="#">Home</Link></h4>
-        </li>
-        <li className="nav-item dropdown">
-        <h4>
-          <Link className="nav-link active dropdown-toggle" to="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Courses
-          </Link>
-          <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <li><Link className="dropdown-item" to="#">Action</Link></li>
-            <li><Link className="dropdown-item" to="#">Another action</Link></li>
-            <li><Link className="dropdown-item" to="#">Something else here</Link></li>
-          </ul>
-          </h4>
-        </li>
-        </ul>
-        <ul className="navbar-nav ms-auto">
-        <li className="nav-item">
-        <Link className="nav-link active" aria-current="page" to="#">
-        <img className="poser float-end" src={dragon} height="5%" width="5%"/>
-        </Link>
-        </li>
-        <li className="nav-item dropdown">
-        <h4>
-          <Link className="nav-link active dropdown-toggle" to="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Faculty
-          </Link>
-          <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <li><Link className="dropdown-item" to="#">Profile</Link></li>
-            <li><Link className="dropdown-item" to="/">Log out</Link></li>
-          </ul>
-          </h4>
-        </li>
-        </ul>
-      
-      
-    </div>
-  </div>
-</nav>
-</div>
+   <FacultyNav/>
 <br/><br/><br/><br/>
 {/*  insert jhere */}
 <div className="navigation">
@@ -111,7 +60,7 @@ export default function Mycourse() {
         <span className='title'>Assignments</span>
       </Link>
     </li>
-    <li className={init5} onClick={() => {if(init5=="list"){setinit5("list active")}setinit1("list");setinit2("list");setinit3("list");setinit4("list");setelement(<Exam/>)}}>
+    <li className={init5} onClick={() => {if(init5=="list"){setinit5("list active")}setinit1("list");setinit2("list");setinit3("list");setinit4("list");setelement(<AddExam/>)}}>
       <Link to="#" >
         <span className='icon'><svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" className="bi bi-clipboard2-data" viewBox="-2 0 25 25">
   <path d="M9.5 0a.5.5 0 0 1 .5.5.5.5 0 0 0 .5.5.5.5 0 0 1 .5.5V2a.5.5 0 0 1-.5.5h-5A.5.5 0 0 1 5 2v-.5a.5.5 0 0 1 .5-.5.5.5 0 0 0 .5-.5.5.5 0 0 1 .5-.5h3Z"/>

@@ -18,7 +18,7 @@ function App() {
       <Routes>
       <Route path="/" element={<Login/>}/>
       <Route path="/student" element={<Studentdash/>}/>
-      <Route path="/student/subtopic" element={<Topic/>}/>
+      <Route path="/student/subtopic:id" element={<Topic/>}/>
       <Route path="/faculty" element={<Facultydash/>}/>
       <Route path="/faculty/mycourses" element={<Mycourse/>}/>
       <Route path="/admin" element={<Admindash />}/>
