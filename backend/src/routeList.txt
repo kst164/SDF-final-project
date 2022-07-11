@@ -1,0 +1,24 @@
+DONE /topics { GET, POST }
+DONE /topics/:id { DELETE }
+
+DONE /topics/:id/subtopics { GET, POST }
+DONE /topics/:id/subtopics/:id { DELETE }
+
+DONE /topics/:id/subtopics/:id/lectures { GET, PATCH }
+    Get them all, or set them all
+
+DONE /topics/:id/subtopics/:id/materials { GET, PATCH }
+    Get them all, or set them all
+
+
+TODO /topics/:id/subtopics/:id/exams { GET, POST }
+TODO /topics/:id/subtopics/:id/exams/:id { GET, DELETE }
+
+TODO /students/:id/scores { GET }
+
+TODO /faculty { GET, POST }
+TODO /faculty/:id { GET, PATCH, DELETE }
+TODO /faculty/:id/topics { GET, POST }
+TODO /faculty/:id/topics/:id { DELETE }
+
+TODO /topics/:id/faculty { GET }
