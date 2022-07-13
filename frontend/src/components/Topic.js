@@ -41,7 +41,7 @@ function Studentdash(props) {
     <div className="poster my-3">
     <li className="list static">
       <Link to="#" >
-        <span className='maintitle'>{params.id}</span>
+        <span className='maintitle'>{params.subtopicname}</span>
       </Link>
     </li>
     </div>

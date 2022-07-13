@@ -8,11 +8,6 @@ import {
   Route,
   Link
 } from "react-router-dom";
-import Lecture from './Lecture';
-import Store from './Store';
-import Hw from './Hw.js';
-import Exam from './Exam.js';
-import Statistics from './Statistics.js';
 import Courseplus from './Courseplus';
 import Addfac from './Addfac';
 export default function Admindash(props) {

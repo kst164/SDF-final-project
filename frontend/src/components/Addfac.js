@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState, useEffect} from 'react';
 import dragon from './dragon.png'
 import './style.css';
 import './Vernav.css';
@@ -13,11 +13,64 @@ import Store from './Store';
 import Hw from './Hw.js';
 import Exam from './Exam.js';
 import Statistics from './Statistics.js';
+import axios from "axios";
+
 export default function Addfac() {
-  const facadder=()=>
+  const [add,setadd]=useState("")
+  const [avail,setavail]=useState([]);
+  const [facid,setfacid]=useState(-1);
+  const [currenttopic,setcurrenttopic]=useState([
+    
+  ]);
+  const [alltopics,setalltopics]=useState([
+    
+  ]);
+  useEffect(() => {
+    const fetch = async () => {
+      const response = await axios.get("/faculty", {
+        auth: {
+          username: localStorage.getItem("username"),
+          password: localStorage.getItem("password"),
+        }
+      });
+      if (response.status == 200) {
+        setavail(response.data);
+      }
+    }
+    fetch();
+  }, [])
+
+  const loadFacData = async () => {
+    const auth = {
+      username: localStorage.getItem("username"),
+      password: localStorage.getItem("password"),
+    }
+    const topics = await axios.get("/topics", {auth});
+    setalltopics(topics.data);
+    const factopics = await axios.get(`/faculty/${facid}/topics`, {auth});
+    setcurrenttopic(factopics.data);
+  }
+  useEffect(() => {
+    console.log(facid);
+    if (facid < 0) {
+      return;
+    }
+    loadFacData();
+  }, [facid]);
+
+  const postid= async ()=>
   {
-    return(<>
-    <div class="modal fade" id="staticBackdrop11" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    const auth = {
+      username: localStorage.getItem("username"),
+      password: localStorage.getItem("password"),
+    }
+    const resp = await axios.post("/faculty", { email: add }, {auth});
+  }
+  const facmanager=()=>
+  {
+    return (
+      <>
+      <div class="modal fade" id="staticBackdrop25" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
@@ -26,26 +79,56 @@ export default function Addfac() {
       </div>
       <div class="modal-body">
       <div class="input-group mb-3 ">
-  <span class="input-group-text w-25" id="basic-addon3"><h5 className='my-2'>Course Name</h5></span>
-  <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" />
-</div>
+  <span class="input-group-text w-25" id="basic-addon3"><h5 className='my-2'>Enrolled Topics </h5></span>
+  <select class="form-select" aria-label="Default select example">
+  <option selected>Open this select menu</option>
+  {currenttopic.map(topic => {
+        return <option value={topic.id}>{topic.name}</option>
+  })}
+</select></div>
 
 <div class="input-group mb-3 ">
-  <span class="input-group-text w-25" id="basic-addon3"><h5 className='my-2'>Subtopic Name</h5></span>
-  <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" />
+  <span class="input-group-text w-25" id="basic-addon3"><h5 className='my-2'>Available Topics </h5></span>
+  <select class="form-select" aria-label="Default select example">
+  <option selected>Open this select menu</option>
+  {alltopics.map(topic => {
+        return <option value={topic.id}>{topic.name}</option>
+  })}
+ 
+</select></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal"  >Add</button>
+      </div>
+    </div>
+  </div>
 </div>
-<div class="input-group mb-3 ">
-  <span class="input-group-text w-25" id="basic-addon3"><h5 className='my-2'>Faculty Name</h5></span>
-  <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" />
+      </>
+    );
+  }
+  const facadder=()=>
+  {
+    return(<>
+    <div class="modal fade" id="staticBackdrop11" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Add a Faculty</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <div class="input-group mb-3 ">
+  <span class="input-group-text w-25" id="basic-addon3"><h5 className='my-2'>Email-ID</h5></span>
+  <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" value={add} onChange={(e)=>{setadd(e.target.value)}}/>
 </div>
-<div class="input-group mb-3 ">
-  <span class="input-group-text w-25" id="basic-addon3"><h5 className='my-2'>Faculty id</h5></span>
-  <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" />
-</div>
+
+
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal" >Add</button>
+        <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal" onClick={postid} >Add</button>
       </div>
     </div>
   </div>
@@ -69,12 +152,9 @@ export default function Addfac() {
       <h1 className="card-title">Available Faculty</h1>
         <hr ></hr>
         <div className="list-group list-group-flush">
-        <Link to="#" className="knock list-group-item "><p className="card-text">Einstein</p></Link>
-        <Link to="#" className="knock list-group-item "><p className="card-text">Tesla</p></Link>
-        <Link to="#" className="knock list-group-item "><p className="card-text">Curie</p></Link>
-        <Link to="#" className="knock list-group-item "><p className="card-text">Newton</p></Link>
-        <Link to="#" className="knock list-group-item "><p className="card-text">Archimedes</p></Link>
-        <Link to="#" className="knock list-group-item "><p className="card-text">Galileo</p></Link>
+        {avail.map(fac => {
+          return <Link to="#" className="knock list-group-item "  data-bs-toggle="modal" data-bs-target="#staticBackdrop25" onClick={()=>{setfacid(fac.id);}}><p className="card-text">{fac.name}</p></Link>
+          })}
         </div>
       </div>
     </div>
@@ -83,6 +163,7 @@ export default function Addfac() {
    
     </div>
     {facadder()}
+    {facmanager()}
     </>
   )
 }

@@ -11,10 +11,31 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
-  Link
+  Link,
+  useNavigate
 } from "react-router-dom";
+import axios from "axios";
+import config from "../config";
+
+axios.defaults.baseURL = "http://192.168.0.111:5000"
+axios.defaults.validateStatus = (_status) => true;
+
 export default function Login() {
+  const navigate = useNavigate();
   const [look, setlook] = useState("role");
+  const [details,setdetails]=useState(
+    {
+      username:"admin@iith.ac.in",
+      password:"123",
+    }
+  );
+  const [newuser,setnewuser]=useState(
+    {
+      username:"",
+      email:"",
+      password:"",
+    }
+  );
   const [set,setset]=useState("/faculty");
   const [updater,setupdater]=useState(def)
   const loki=()=>
@@ -36,6 +57,41 @@ export default function Login() {
       return (def);
     }
   }
+  const na= async ()=>
+  {
+    const response = await axios.post("/signup", {
+      name: newuser.username,
+      email: newuser.email,
+      password: newuser.password,
+    });
+    if (response.statusCode == 201) {
+      alert("User created. You can sign in now");
+    }
+  }
+  const req= async ()=>
+  {
+    console.log("called");
+    const response = await axios.head("/signin" + "/"+look, {
+      auth: {
+        username: details.username,
+        password: details.password,
+      }
+    });
+    console.log(response.status);
+    if (response.status < 300) {
+      localStorage.setItem("username", details.username);
+      console.log(localStorage.getItem("username"));
+      localStorage.setItem("password", details.password);
+      console.log("request done");
+      console.log(response.status);
+      navigate("/" + look);
+      axios.defaults.auth = {
+        username: details.username,
+        password: details.password,
+      }
+    }
+    // console.log(look);
+  }
   const coc=()=>
   {
     if(look=="student")
@@ -54,6 +110,45 @@ export default function Login() {
     {
       return ("#");
     }
+  }
+  const sign=()=>
+  {
+    return(
+      <>
+        <div className="modal fade deaf" id="staticBackdrop20" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div className="modal-dialog modal-xl">
+    <div className="modal-content">
+      <div className="modal-header">
+        <h5 className="modal-title text-center deaf" id="staticBackdropLabel">Sign-Up</h5>
+        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div className="modal-body">
+        {/*matter start*/}
+      <div className="input-group mb-3 ">
+  <span className="input-group-text w-25" id="basic-addon3"><h5 className='my-2'>Username</h5></span>
+  <input type="text" className="form-control" id="basic-url" aria-describedby="basic-addon3"  placeholder='UserName' value={newuser.username} onChange={(e)=>{setnewuser({...newuser,username:e.target.value})}}/>
+</div>
+
+<div className="input-group mb-3 ">
+  <span className="input-group-text w-25" id="basic-addon3"><h5 className='my-2'>Email-ID</h5></span>
+  <input type="text" className="form-control" id="basic-url" aria-describedby="basic-addon3" placeholder='Email-ID' value={newuser.email} onChange={(e)=>{setnewuser({...newuser,email:e.target.value})}}/>
+</div>
+<div className="input-group mb-3 ">
+  <span className="input-group-text w-25" id="basic-addon3"><h5 className='my-2'>Password</h5></span>
+  <input type="password" className="form-control" id="basic-url" aria-describedby="basic-addon3" placeholder='Password' value={newuser.password} onChange={(e)=>{setnewuser({...newuser,password:e.target.value})}}/>
+</div>
+
+{/*matter end*/}
+      </div>
+      <div className="modal-footer">
+        <button type="button" className="btn btn-outline-danger" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" className="btn btn-outline-success" data-bs-dismiss="modal" onClick={na}>Done</button>
+      </div>
+    </div>
+  </div>
+</div>
+      </>
+    )
   }
   return (
     <>
@@ -92,9 +187,9 @@ export default function Login() {
     <section className="sec1 vh-100" id="section1"  >
   <div className="container py-5 h-100">
     <div className="row d-flex justify-content-center align-items-center h-100">
-    <div class="col-md-9 col-lg-6 col-xl-5">
+    <div className="col-md-9 col-lg-6 col-xl-5">
         <img src={loki()}
-          class="img-fluid hooh "  />
+          className="img-fluid hooh "  />
       </div>
       <div className="col-12 col-md-8 col-lg-6 col-xl-5">
         <div className="d2 card shadow-2-strong " >
@@ -104,20 +199,20 @@ export default function Login() {
 
             
             <div className="form-floating mb-3 ">
-  <input type="email" className="carrot form-control" id="floatingInput" placeholder="name@example.com"/>
+  <input type="email" className="carrot form-control" id="floatingInput" placeholder="name@example.com" value={details.username} onChange={(e)=>{setdetails({...details,username:e.target.value})}}/>
   <label htmlFor="floatingInput">Email address</label>
 </div>
             
             <div className="form-floating">
-  <input type="password" className="carrot form-control" id="floatingPassword" placeholder="Password"/>
+  <input type="password" className="carrot form-control" id="floatingPassword" placeholder="Password" value={details.password} onChange={(e)=>{setdetails({...details,password:e.target.value})}}/>
   <label htmlFor="floatingPassword">Password</label>
 </div>
 
             <div className="form-check d-flex justify-content-start mb-4">
             </div>
             <div >
-            <select onChange={async (e)=>{setlook(e.target.value)}}  class="form-select my-4 ferb" aria-label="Default select example">
-  <option selected value="role">Role</option>
+            <select onChange={async (e)=>{setlook(e.target.value)}}  className="form-select my-4 ferb" aria-label="Default select example">
+  <option defaultValue="role">Role</option>
   <option value="admin" >Admin</option>
   <option value="faculty">Faculty</option>
   <option value="student">Student</option>
@@ -125,13 +220,13 @@ export default function Login() {
 </select>
             </div>
             
-            <Link  to={coc()} >
-            <button className="hell btn  btn-lg btn-primary  btn-block" type="submit">Login</button>
+            <Link email={details.username} password={details.password} to={{pathname: coc(), state: {details}}} >
             </Link>
+            <button className="hell btn  btn-lg btn-primary  btn-block" type="submit" onClick={req}>Login</button>
             <hr className="my-4"/>
             <Link to="#">
             <button className="btn btn-lg btn-block btn-primary gooo" 
-              type="submit"><i className="fab fa-google me-2"></i> Sign in with google</button>
+              type="submit" data-bs-toggle="modal" data-bs-target="#staticBackdrop20"> Sign-up</button>
              </Link>
           </div>
         </div>
@@ -151,7 +246,7 @@ export default function Login() {
   
   <div className="sampu">
   <div className="how-section1">  
-  <div className="row">
+  {/* <div className="row">
       <div className="col-md-6">
           <h4>Assignment Evaluation</h4>
                       <h4 className="subheading">Evaluate your assignments</h4>
@@ -172,7 +267,7 @@ export default function Login() {
                       <p className="text-muted">Write exams on the website created by concerned faculty. Complete Within the time limit.
                           Get marks immediately. Access redcorded classes,reference books,special materials and class presentations. Many features can be accessed on website on the go.</p>
       </div>
-  </div>
+  </div> */}
   </div>
   </div>
   </div>
@@ -248,6 +343,7 @@ export default function Login() {
 </div>
 </div>
   </div>
+  {sign()}
    {/* feedback begin */}
     </>
   )
