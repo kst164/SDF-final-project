@@ -13,6 +13,8 @@ import Store from './Store';
 import Hw from './Hw.js';
 import Exam from './Exam.js';
 import Statistics from './Statistics.js';
+import RemoveCircleOutline from "@material-ui/icons/RemoveCircleOutline";
+import Edit from "@material-ui/icons/Edit";
 export default function Courseplus() {
   const adder=()=>
   {
@@ -46,6 +48,37 @@ export default function Courseplus() {
       </>
     );
   }
+  const crud=()=>
+  {
+    return(<>
+    <div class="modal fade" id="staticBackdrop12" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Add a Subtopic</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <div class="input-group mb-3 ">
+  <span class="input-group-text w-25" id="basic-addon3"><h5 className='my-2'>Course Name</h5></span>
+  <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" value={"Calculus"}/>
+</div>
+
+<div class="input-group mb-3 ">
+  <span class="input-group-text w-25" id="basic-addon3"><h5 className='my-2'>Name of new subtopic</h5></span>
+  <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3"/>
+</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal" >Understood</button>
+      </div>
+    </div>
+  </div>
+</div>
+    </>
+    );
+  }
   return (
     <>
         <div className="namers">
@@ -58,19 +91,18 @@ export default function Courseplus() {
 <div className="namers row row-cols-1 row-cols-md-2 g-4">
   <div className="col w-50 p-3">  
   <div className="card border-primary arrow hover-shadow p-3 mb-5 bg-body rounded">
-  
       <div className="card-body">
-      <h1 className="card-title"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" className="bi bi-calculator-fill" viewBox="0 0 16 16">
+      <h1 className="card-title d-flex justify-content-between align-items-center"><div><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" className="bi bi-calculator-fill" viewBox="0 0 16 16">
   <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm2 .5v2a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 0-.5-.5h-7a.5.5 0 0 0-.5.5zm0 4v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5zM4.5 9a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zM4 12.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5zM7.5 6a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zM7 9.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5zm.5 2.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zM10 6.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5zm.5 2.5a.5.5 0 0 0-.5.5v4a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-4a.5.5 0 0 0-.5-.5h-1z"/>
-</svg>Maths</h1>
+</svg>Maths</div><small><Link to="#" data-bs-toggle="modal" data-bs-target="#staticBackdrop12"><Edit style={{fontSize:"1.4em",color:"black"}}/></Link></small></h1>
         <hr ></hr>
-        <div className="list-group list-group-flush">
-        <Link to="/student/subtopic" className="list-group-item "><p className="card-text">Calculus</p></Link>
-        <Link to="/student/subtopic" className="list-group-item "><p className="card-text">3D Geometry</p></Link>
-        <Link to="#" className="list-group-item "><p className="card-text">Vectors</p></Link>
-        <Link to="#" className="list-group-item "><p className="card-text">Algebra</p></Link>
-        <Link to="#" className="list-group-item "><p className="card-text">Trigonometry</p></Link>
-        <Link to="#" className="list-group-item "><p className="card-text">Binomial Theorem</p></Link>
+        <div className="list-group list-group-flush container">
+        <Link to='#'  className="list-group-item d-flex justify-content-between align-items-center" ><h5 className="mb-1">Caclulus</h5>  <small><RemoveCircleOutline /></small></Link>
+        <Link to="#" className="list-group-item d-flex justify-content-between align-items-center" ><h5 className="mb-1">3D Geomtery</h5>  <small><RemoveCircleOutline /></small></Link>
+        <Link to="#" className="list-group-item d-flex justify-content-between align-items-center" ><h5 className="mb-1">Vectors</h5>  <small><RemoveCircleOutline /></small></Link>
+        <Link to="#" className="list-group-item d-flex justify-content-between align-items-center" ><h5 className="mb-1">Algebra</h5>  <small><RemoveCircleOutline /></small></Link>
+        <Link to="#" className="list-group-item d-flex justify-content-between align-items-center" ><h5 className="mb-1">Binomial Theorem</h5>  <small><RemoveCircleOutline /></small></Link>
+        <Link to="#" className="list-group-item d-flex justify-content-between align-items-center" ><h5 className="mb-1">Probability</h5>  <small><RemoveCircleOutline /></small></Link>
         </div>
       </div>
     </div>
@@ -137,8 +169,11 @@ export default function Courseplus() {
 </div>
 </div>
 {/*  insert jhere */}
+
+{/*  insert jhere */}
 </div>
 {adder()}
+{crud()}
     </>
   )
 }

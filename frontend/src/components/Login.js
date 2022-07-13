@@ -1,7 +1,11 @@
-import React from 'react'
+import React,{useState} from 'react'
 import first from './first.jpg'
 import second from './second.jpg'
 import profile from './profile.png'
+import def from './def.jpg'
+import sp from './student.svg'
+import fp from './faculty.jpg'
+import ap from './admin.jpg'
 import {  Link as Link1,animateScroll as scroll } from "react-scroll";
 import {
   BrowserRouter as Router,
@@ -10,8 +14,47 @@ import {
   Link
 } from "react-router-dom";
 export default function Login() {
-  
-
+  const [look, setlook] = useState("role");
+  const [set,setset]=useState("/faculty");
+  const [updater,setupdater]=useState(def)
+  const loki=()=>
+  {
+    if(look=="student")
+    {
+      return (sp);
+    }
+    else if(look=="faculty")
+    {
+      return (fp);
+    }
+    else if(look=="admin")
+    {
+      return (ap);
+    }
+    else
+    {
+      return (def);
+    }
+  }
+  const coc=()=>
+  {
+    if(look=="student")
+    {
+      return ("/student");
+    }
+    else if(look=="faculty")
+    {
+      return ("/faculty")
+    }
+    else if(look=="admin")
+    {
+      return ("/admin")
+    }
+    else
+    {
+      return ("#");
+    }
+  }
   return (
     <>
     <div className="container-fluid">
@@ -49,6 +92,10 @@ export default function Login() {
     <section className="sec1 vh-100" id="section1"  >
   <div className="container py-5 h-100">
     <div className="row d-flex justify-content-center align-items-center h-100">
+    <div class="col-md-9 col-lg-6 col-xl-5">
+        <img src={loki()}
+          class="img-fluid hooh "  />
+      </div>
       <div className="col-12 col-md-8 col-lg-6 col-xl-5">
         <div className="d2 card shadow-2-strong " >
           <div className="ex3 card-body p-5 text-center bgbro">
@@ -67,13 +114,22 @@ export default function Login() {
 </div>
 
             <div className="form-check d-flex justify-content-start mb-4">
-              
             </div>
-            <Link to="/student">
+            <div >
+            <select onChange={async (e)=>{setlook(e.target.value)}}  class="form-select my-4 ferb" aria-label="Default select example">
+  <option selected value="role">Role</option>
+  <option value="admin" >Admin</option>
+  <option value="faculty">Faculty</option>
+  <option value="student">Student</option>
+  
+</select>
+            </div>
+            
+            <Link  to={coc()} >
             <button className="hell btn  btn-lg btn-primary  btn-block" type="submit">Login</button>
             </Link>
             <hr className="my-4"/>
-            <Link to="/faculty">
+            <Link to="#">
             <button className="btn btn-lg btn-block btn-primary gooo" 
               type="submit"><i className="fab fa-google me-2"></i> Sign in with google</button>
              </Link>
@@ -97,11 +153,10 @@ export default function Login() {
   <div className="how-section1">  
   <div className="row">
       <div className="col-md-6">
-          <h4>Get hired quickly</h4>
-                      <h4 className="subheading">GetLance makes it easy to connect with clients and begin doing great work.</h4>
-                      <p className="text-muted">Streamlined hiring. GetLance’s sophisticated algorithms highlight projects you’re a great fit for.
-                          Top Rated and Rising Talent programs. Enjoy higher visibility with the added status of prestigious programs.
-                          Do substantial work with top clients. GetLance pricing encourages freelancers to use GetLance for repeat relationships with their clients.</p>
+          <h4>Assignment Evaluation</h4>
+                      <h4 className="subheading">Evaluate your assignments</h4>
+                      <p className="text-muted">Students can submit their work done and get 
+                      evaluated by concerned faculty and also can unsubmit their work.</p>
       </div>
       <div className="col-md-6 how-img">
           <img src="https://image.ibb.co/cHgKnU/Work_Section2_freelance_img2.png" className="rounded-circle img-fluid" alt=""/>
@@ -112,11 +167,10 @@ export default function Login() {
             <img src="https://image.ibb.co/ctSLu9/Work_Section2_freelance_img3.png" className="rounded-circle img-fluid" alt=""/>
       </div>
       <div className="col-md-6">
-          <h4>Work efficiently, effectively.</h4>
-                      <h4 className="subheading">With GetLance, you have the freedom and flexibility to control when, where, and how you work. Each project includes an online workspace shared by you and your client, allowing you to:</h4>
-                      <p className="text-muted">Send and receive files. Deliver digital assets in a secure environment.
-                          Share feedback in real time. Use GetLance Messages to communicate via text, chat, or video.
-                          Use our mobile app. Many features can be accessed on your mobile phone when on the go.</p>
+          <h4>Exams</h4>
+                      <h4 className="subheading"> Write your exams and get your result immediately</h4>
+                      <p className="text-muted">Write exams on the website created by concerned faculty. Complete Within the time limit.
+                          Get marks immediately. Access redcorded classes,reference books,special materials and class presentations. Many features can be accessed on website on the go.</p>
       </div>
   </div>
   </div>
@@ -188,10 +242,10 @@ export default function Login() {
   <span className="sizer input-group-text">Suggestion Box</span>
   <textarea  rows="10"  className="soze form-control h-25" aria-label="With textarea" placeholder='Your Suggestions here'></textarea>
 </div>\
-<Link to="/admin">
-<div className="d-grid gap-2 col-6 mx-auto text-center">
+
+<div className="d-grid gap-2 col-6 mx-auto text-center my-4">
 <button type="submit" className="btn btn-outline-primary">Submit</button>
-</div></Link>
+</div>
 </div>
   </div>
    {/* feedback begin */}

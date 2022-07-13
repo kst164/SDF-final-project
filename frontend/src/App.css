@@ -437,7 +437,8 @@ body {
 }
 .bgbro
 {
-  background-color:rgb(224, 214, 214)
+  /* background-color:rgb(224, 214, 214); */
+  background-color:#f0f2f5;
 }
 .point
 {
@@ -456,7 +457,7 @@ body {
 }
 .carrot
 {
-    background-color:rgb(224, 214, 214);
+    background-color:#f0f2f5;
     border-radius:5px
 }
 #section-one-wrapper
@@ -798,3 +799,13 @@ for Student dash board
 *************************** */
 
 /* Style for vertical navbar */
+.ferb
+{
+    background-color:#f0f2f5;
+}
+.hooh
+{
+    transition:0.7s;
+    width:80%;
+    height:80%;
+}
