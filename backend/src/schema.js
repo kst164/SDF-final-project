@@ -5,7 +5,7 @@ const id = {
     type: DataTypes.INTEGER.UNSIGNED,
     autoIncrement: true,
     primaryKey: true,
-    unique: "id",
+    allowNull: false,
 };
 const name = {
     type: DataTypes.TEXT,
@@ -14,28 +14,45 @@ const name = {
 const email = {
     type: DataTypes.TEXT,
     allowNull: false,
+    unique: true,
     validate: {
         isEmail: true,
     },
 };
 
-const Student = sequelize.define("students", {
+const User = sequelize.define("users", {
     id,
     name,
     email,
+    hash: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+    },
 });
 
 const Faculty = sequelize.define("faculty", {
-    id,
-    name,
-    email,
 });
+Faculty.belongsTo(User, {
+    onDelete: "CASCADE",
+    foreignKey: {
+        name: "userId",
+        allowNull: true,
+        unique: true,
+    }
+})
+User.hasOne(Faculty);
 
 const Admin = sequelize.define("admins", {
-    id,
-    name,
-    email,
 });
+Admin.belongsTo(User, {
+    onDelete: "CASCADE",
+    foreignKey: {
+        name: "userId",
+        allowNull: true,
+        unique: true,
+    }
+})
+User.hasOne(Admin);
 
 const Topic = sequelize.define("topics", {
     id,
@@ -50,6 +67,7 @@ Subtopic.belongsTo(Topic, {
     onDelete: "CASCADE",
     foreignKey: {
         name: "topicId",
+        allowNull: false,
     },
 });
 Topic.hasMany(Subtopic);
@@ -67,9 +85,10 @@ Topic.belongsToMany(Faculty, {
 });
 
 const Lecture = sequelize.define("lectures", {
+    id,
     lectureNumber: {
         type: DataTypes.INTEGER.UNSIGNED,
-        primaryKey: true,
+        unique: "compIndex",
     },
     name,
     description: DataTypes.TEXT,
@@ -85,15 +104,17 @@ Lecture.belongsTo(Subtopic, {
     onDelete: "CASCADE",
     foreignKey: {
         name: "subtopicId",
-        primaryKey: true,
+        allowNull: false,
+        unique: "compIndex",
     },
 });
 Subtopic.hasMany(Lecture);
 
 const Material = sequelize.define("materials", {
-    materialNumber: {
-        type: DataTypes.INTEGER.UNSIGNED,
-        primaryKey: true,
+    id,
+    name: {
+        type: DataTypes.TEXT,
+        allowNull: false,
     },
     link: {
         type: DataTypes.TEXT,
@@ -106,34 +127,31 @@ const Material = sequelize.define("materials", {
 Material.belongsTo(Lecture, {
     onDelete: "CASCADE",
     foreignKey: {
-        name: "subtopicId",
-        primaryKey: true,
+        name: "lectureId",
+        allowNull: false,
     },
 });
 Lecture.hasMany(Material);
 
 const Exam = sequelize.define("exams", {
-    examNumber: {
-        type: DataTypes.INTEGER.UNSIGNED,
-        unique: "compIndex",
-        primaryKey: true,
-    },
+    id,
     description: DataTypes.TEXT,
-    timeLimit: DataTypes.TIME,
+    timeLimit: DataTypes.INTEGER.UNSIGNED, // in seconds
 });
 Exam.belongsTo(Subtopic, {
     onDelete: "CASCADE",
     foreignKey: {
         name: "subtopicId",
-        primaryKey: true,
+        allowNull: false,
     },
 });
 Subtopic.hasMany(Exam);
 
 const Question = sequelize.define("questions", {
+    id,
     questionNumber: {
         type: DataTypes.INTEGER.UNSIGNED,
-        primaryKey: true,
+        unique: "compIndex",
     },
     questionText: {
         type: DataTypes.TEXT,
@@ -148,16 +166,17 @@ Question.belongsTo(Exam, {
     onDelete: "CASCADE",
     foreignKey: {
         name: "examId",
-        primaryKey: true,
+        allowNull: false,
+        unique: "compIndex",
     },
 });
 Exam.hasMany(Question);
 
-const QuestionOption = sequelize.define("question_options", {
+const Option = sequelize.define("options", {
+    id,
     optionNumber: {
         type: DataTypes.INTEGER.UNSIGNED,
         unique: "compIndex",
-        primaryKey: true,
     },
     optionText: {
         type: DataTypes.TEXT,
@@ -168,16 +187,18 @@ const QuestionOption = sequelize.define("question_options", {
         allowNull: false,
     },
 });
-QuestionOption.belongsTo(Question, {
+Option.belongsTo(Question, {
     onDelete: "CASCADE",
     foreignKey: {
         name: "questionId",
-        primaryKey: true,
+        allowNull: false,
+        unique: "compIndex",
     },
 });
-Question.hasMany(QuestionOption);
+Question.hasMany(Option);
 
 const Score = sequelize.define("scores", {
+    id,
     score: {
         type: DataTypes.INTEGER.UNSIGNED,
         allowNull: false,
@@ -187,25 +208,27 @@ const Score = sequelize.define("scores", {
         allowNull: false,
     },
 });
-Score.belongsTo(Student, {
+Score.belongsTo(User, {
     onDelete: "CASCADE",
     foreignKey: {
         name: "studentId",
-        primaryKey: true,
+        allowNull: false,
+        unique: "compIndex",
     },
 });
 Score.belongsTo(Exam, {
     onDelete: "CASCADE",
     foreignKey: {
         name: "examId",
-        primaryKey: true,
+        allowNull: false,
+        unique: "compIndex",
     },
 });
-Student.hasMany(Score);
+User.hasMany(Score);
 Exam.hasMany(Score);
 
 const models = {
-    Student,
+    User,
     Faculty,
     Admin,
     Topic,
@@ -215,7 +238,7 @@ const models = {
     Material,
     Exam,
     Question,
-    QuestionOption,
+    Option,
     Score,
 };
 

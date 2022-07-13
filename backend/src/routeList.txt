@@ -4,21 +4,19 @@ DONE /topics/:id { DELETE }
 DONE /topics/:id/subtopics { GET, POST }
 DONE /topics/:id/subtopics/:id { DELETE }
 
-DONE /topics/:id/subtopics/:id/lectures { GET, PATCH }
-    Get them all, or set them all
+DONE /topics/:id/subtopics/:id/lectures { GET, POST }
+DONE /topics/:id/subtopics/:id/lectures/:n { DELETE }
 
-DONE /topics/:id/subtopics/:id/materials { GET, PATCH }
-    Get them all, or set them all
+DONE /topics/:id/subtopics/:id/lectures/:n/materials { GET, POST }
+DONE /topics/:id/subtopics/:id/lectures/:n/materials/:id { DELETE }
 
+DONE /topics/:id/subtopics/:id/exams { GET, POST }       // GET includes scores
+DONE /topics/:id/subtopics/:id/exams/:id { GET, DELETE }
+DONE /topics/:id/subtopics/:id/exams/:id/submit { POST }
 
-TODO /topics/:id/subtopics/:id/exams { GET, POST }
-TODO /topics/:id/subtopics/:id/exams/:id { GET, DELETE }
+DONE /faculty { GET, POST }
+DONE /faculty/:id { GET, DELETE }
+DONE /faculty/:id/topics { GET, POST }
+DONE /faculty/:id/topics/:id { DELETE }
 
-TODO /students/:id/scores { GET }
-
-TODO /faculty { GET, POST }
-TODO /faculty/:id { GET, PATCH, DELETE }
-TODO /faculty/:id/topics { GET, POST }
-TODO /faculty/:id/topics/:id { DELETE }
-
-TODO /topics/:id/faculty { GET }
+DONE /topics/:id/faculty { GET }
