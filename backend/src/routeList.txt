@@ -1,3 +1,6 @@
+DONE /signup { POST }
+DONE /signin/{ student, faculty, admin } { HEAD }
+
 DONE /topics { GET, POST }
 DONE /topics/:id { DELETE }
 

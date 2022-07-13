@@ -14,9 +14,11 @@ const saltRounds = 10;
 //     password,
 // }
 router.post("/signup", async (req, res) => {
+    console.log(req.url);
+    console.log(req.body);
     const user = await models.User.findOne({
         where: {
-            email: req.params.email,
+            email: req.body.email,
         }
     })
     if (user) {
@@ -25,8 +27,8 @@ router.post("/signup", async (req, res) => {
     }
     const hash = await bcrypt.hash(req.body.password, saltRounds);
     await models.User.create({
-        name: req.params.name,
-        email: req.params.email,
+        name: req.body.name,
+        email: req.body.email,
         hash,
     })
     res.sendStatus(201);
@@ -36,7 +38,7 @@ router.use(async (req, res, next) => {
     // TODO: auth
     const creds = auth(req);
     if (!creds) {
-        res.send(401);
+        res.sendStatus(401);
         return;
     }
     const user = await models.User.findOne({
@@ -62,9 +64,8 @@ router.use(async (req, res, next) => {
 
     const isFaculty = !(user.faculty == null);
     const isAdmin = !(user.admin == null);
+    console.log(isAdmin);
     res.locals = {
-        //userType: req.params.userType,
-        userType: "admin",
         isFaculty,
         isAdmin,
         userId: user.id,
@@ -73,6 +74,24 @@ router.use(async (req, res, next) => {
     }
     next();
 });
+
+router.head("/signin/:userType", (req, res) => {
+    let code;
+    switch (req.params.userType) {
+        case "student":
+            code = 200;
+            break;
+        case "faculty":
+            code = res.locals.isFaculty ? 200 : 403;
+            break;
+        case "admin":
+            code = res.locals.isAdmin ? 200 : 403;
+            break;
+        default:
+            code = 400;
+    }
+    res.sendStatus(code);
+})
 
 // Response JSON:
 // [
