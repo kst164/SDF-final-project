@@ -64,6 +64,7 @@ router.use(async (req, res, next) => {
 
     const isFaculty = !(user.faculty == null);
     const isAdmin = !(user.admin == null);
+    console.log(isFaculty);
     console.log(isAdmin);
     res.locals = {
         isFaculty,
@@ -214,7 +215,7 @@ router.post("/topics/:id/subtopics", async (req, res) => {
             return;
         }
     } else if (!res.locals.isAdmin){
-        res.sendStatus(401);
+        res.sendStatus(403);
         return;
     }
 
@@ -234,7 +235,7 @@ router.post("/topics/:id/subtopics", async (req, res) => {
 
 router.delete("/topics/:topicId/subtopics/:subtopicId", async (req, res) => {
     if (res.locals.isFaculty) {
-        if (!isFacultyInTopic(res.locals.userId, req.params.id)) {
+        if (!isFacultyInTopic(res.locals.userId, req.params.topicId)) {
             // unauthorized faculty member
             res.sendStatus(403);
             return;
@@ -291,7 +292,7 @@ router.post("/topics/:topicId/subtopics/:subtopicId/lectures", async (req, res) 
     }
 
     if (res.locals.isFaculty) {
-        if (!isFacultyInTopic(res.locals.userId, req.params.id)) {
+        if (!isFacultyInTopic(res.locals.userId, req.params.topicId)) {
             // unauthorized faculty member
             res.sendStatus(403);
             return;
@@ -302,14 +303,25 @@ router.post("/topics/:topicId/subtopics/:subtopicId/lectures", async (req, res) 
     }
 
     try {
-        await subtopic.createLecture({
-            lectureNumber: (await subtopic.countLectures()),
+    console.log("g");
+        const count = await models.Lecture.count({ where: { subtopicId: subtopic.id } });
+    console.log("i");
+        await models.Lecture.create({
+            lectureNumber: count,
             name: req.body.name,
             description: req.body.description,
             link: req.body.link,
-        });
+            subtopicId: subtopic.id,
+        })
+        //await subtopic.createLecture({
+            //lectureNumber: (await subtopic.countLectures()),
+            //name: req.body.name,
+            //description: req.body.description,
+            //link: req.body.link,
+        //});
         res.sendStatus(201);
     } catch (err) {
+    console.log("h");
         console.log(err.message);
         res.sendStatus(500);
         return;
@@ -318,12 +330,12 @@ router.post("/topics/:topicId/subtopics/:subtopicId/lectures", async (req, res) 
 
 router.delete("/topics/:topicId/subtopics/:subtopicId/lectures/:lectureNumber", async (req, res) => {
     const subtopic = await models.Subtopic.findByPk(req.params.subtopicId);
-    if (subtopic -= null || subtopic.topicId != req.params.topicId) {
+    if (subtopic == null || subtopic.topicId != req.params.topicId) {
         res.sendStatus(400);
         return;
     }
     if (res.locals.isFaculty) {
-        if (!isFacultyInTopic(res.locals.userId, req.params.id)) {
+        if (!isFacultyInTopic(res.locals.userId, req.params.topicId)) {
             // unauthorized faculty member
             res.sendStatus(403);
             return;
@@ -419,7 +431,7 @@ router.post("/topics/:topicId/subtopics/:subtopicId/lectures/:lectureNumber/mate
     }
 
     if (res.locals.isFaculty) {
-        if (!isFacultyInTopic(res.locals.userId, req.params.id)) {
+        if (!isFacultyInTopic(res.locals.userId, req.params.topicId)) {
             // unauthorized faculty member
             res.sendStatus(403);
             return;
@@ -456,7 +468,7 @@ router.delete("/topics/:topicId/subtopics/:subtopicId/lectures/:lectureNumber/ma
         return;
     }
     if (res.locals.isFaculty) {
-        if (!isFacultyInTopic(res.locals.userId, req.params.id)) {
+        if (!isFacultyInTopic(res.locals.userId, req.params.topicId)) {
             // unauthorized faculty member
             res.sendStatus(403);
             return;
@@ -557,13 +569,13 @@ router.post("/topics/:topicId/subtopics/:subtopicId/exams", async (req, res) => 
         return;
     }
     if (res.locals.isFaculty) {
-        if (!isFacultyInTopic(res.locals.userId, req.params.id)) {
+        if (!isFacultyInTopic(res.locals.userId, req.params.topicId)) {
             // unauthorized faculty member
             res.sendStatus(403);
             return;
         }
     } else if (!res.locals.isAdmin){
-        res.sendStatus(401);
+        res.sendStatus(403);
         return;
     }
 

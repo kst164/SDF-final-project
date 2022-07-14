@@ -4,7 +4,7 @@ import cors from "cors";
 import db from "./db.js";
 
 import router from "./routes.js";
-import facultyRooter from "./facultyRouter.js";
+import facultyRouter from "./facultyRouter.js";
 
 const app = express();
 
@@ -12,13 +12,14 @@ app.use(cors());
 app.use(express.json());
 
 app.use((req, _res, next) => {
+    console.log(req.method)
     console.log(req.path);
     console.log(req.body);
     next();
 })
 
 app.use(router);
-app.use("/faculty", facultyRooter);
+app.use("/faculty", facultyRouter);
 
 /*import bcrypt from "bcrypt";
 

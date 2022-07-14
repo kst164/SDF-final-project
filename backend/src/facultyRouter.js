@@ -61,6 +61,33 @@ facultyRouter.post("/", async (req, res) => {
     res.sendStatus(201);
 });
 
+facultyRouter.get("/topics", async (_req, res) => {
+    console.log("logg")
+    const faculty = await models.Faculty.findOne({
+        where: {
+            userId: res.locals.userId,
+        },
+        attributes: ["id"]
+    });
+    if (faculty == null) {
+        console.log("nullll")
+        res.sendStatus(404);
+        return;
+    }
+    const topics = await faculty.getTopics({
+        attributes: ["id", "name"],
+        include: [{
+            model: models.Subtopic,
+            attributes: ["id", "name"],
+        } ]
+    });
+    res.send(topics.map(topic => {
+        const top = topic.toJSON();
+        top.faculty_topics = undefined;
+        return top;
+    }));
+})
+
 // Response JSON:
 // {
 //     id,
@@ -93,7 +120,8 @@ facultyRouter.get("/:facultyId/topics", async (req, res) => {
     const faculty = await models.Faculty.findOne({
         where: {
             userId: req.params.facultyId,
-        }
+        },
+        attributes: ["id"]
     });
     if (faculty == null) {
         res.sendStatus(404);
@@ -101,9 +129,12 @@ facultyRouter.get("/:facultyId/topics", async (req, res) => {
     }
     const topics = await faculty.getTopics({
         attributes: ["id", "name"],
-        raw: true,
     });
-    res.send(topics);
+    res.send(topics.map(topic => {
+        const top = topic.toJSON();
+        top.faculty_topics = undefined;
+        return top;
+    }));
 })
 
 // Request JSON:
@@ -120,12 +151,16 @@ facultyRouter.post("/:facultyId/topics", async (req, res) => {
         res.sendStatus(404);
         return;
     }
-    await faculty.addTopic({ 
-        where: {
-            id: req.body.topicId,
-        }
+    const topic = await models.Topic.findByPk(req.body.topicId);
+    if (topic == null) {
+        res.sendStatus(400);
+        return;
+    }
+    await models.FacultyTopics.create({
+        facultyId: faculty.id,
+        topicId: topic.id,
     })
-    res.send(topics);
+    res.sendStatus(201);
 })
 
 facultyRouter.delete("/:facultyId/topics/:topicId", async (req, res) => {
