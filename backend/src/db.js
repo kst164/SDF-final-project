@@ -1,7 +1,7 @@
 import { Sequelize } from "sequelize";
 
 const config =  {
-    username: "kartheek",
+    username: "ubuntu",
     password: "321321",
     database: "edu",
     host: "localhost",

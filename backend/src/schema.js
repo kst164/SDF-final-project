@@ -12,7 +12,7 @@ const name = {
     allowNull: false,
 };
 const email = {
-    type: DataTypes.TEXT,
+    type: DataTypes.STRING,
     allowNull: false,
     unique: true,
     validate: {

@@ -740,7 +740,7 @@ router.post("/topics/:topicId/subtopics/:subtopicId/exams/:examId/submit", async
     });
 
     if (exam == null) {
-        res.send(400);
+        res.sendStatus(403);
     }
 
     let score = 0;
