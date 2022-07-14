@@ -19,8 +19,9 @@ function App() {
       <Route path="/" element={<Login/>}/>
       <Route path="/student" element={<Studentdash/>}/>
       <Route path="/student/subtopic/:topicid/:subtopicid/:subtopicname" element={<Topic/>}/>
+      {/* <Route path="/student/subtopic/:topicid/:subtopicid/:subtopicname" element={<Topic/>}/> */}
       <Route path="/faculty" element={<Facultydash/>}/>
-      <Route path="/faculty/mycourses" element={<Mycourse/>}/>
+      <Route path="/faculty/mycourses/:topicid/:subtopicid/:subtopicname" element={<Mycourse/>}/>
       <Route path="/admin" element={<Admindash />}/>
       </Routes>
     </Router>

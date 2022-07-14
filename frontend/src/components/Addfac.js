@@ -19,6 +19,7 @@ export default function Addfac() {
   const [add,setadd]=useState("")
   const [avail,setavail]=useState([]);
   const [facid,setfacid]=useState(-1);
+  const [topicToAdd, setTopicToAdd] = useState("");
   const [currenttopic,setcurrenttopic]=useState([
     
   ]);
@@ -66,6 +67,14 @@ export default function Addfac() {
     }
     const resp = await axios.post("/faculty", { email: add }, {auth});
   }
+  const addfactopic= async ()=>
+  {
+    const auth = {
+      username: localStorage.getItem("username"),
+      password: localStorage.getItem("password"),
+    }
+    const resp = await axios.post(`/faculty/${facid}/topics`, { topicId: topicToAdd }, {auth});
+  }
   const facmanager=()=>
   {
     return (
@@ -89,8 +98,8 @@ export default function Addfac() {
 
 <div class="input-group mb-3 ">
   <span class="input-group-text w-25" id="basic-addon3"><h5 className='my-2'>Available Topics </h5></span>
-  <select class="form-select" aria-label="Default select example">
-  <option selected>Open this select menu</option>
+  <select class="form-select" aria-label="Default select example" onChange={async (e)=>{setTopicToAdd(e.target.value)}}>
+  <option value="" selected>Open this select menu</option>
   {alltopics.map(topic => {
         return <option value={topic.id}>{topic.name}</option>
   })}
@@ -99,7 +108,7 @@ export default function Addfac() {
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal"  >Add</button>
+        <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal" onClick={addfactopic} >Add</button>
       </div>
     </div>
   </div>
