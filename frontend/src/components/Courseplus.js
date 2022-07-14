@@ -15,7 +15,7 @@ import Exam from './Exam.js';
 import Statistics from './Statistics.js';
 import RemoveCircleOutline from "@material-ui/icons/RemoveCircleOutline";
 import Edit from "@material-ui/icons/Edit";
-import Plus from "@material-ui/icons/PlusOneOutlined"
+import Add from "@material-ui/icons/AddCircleOutline"
 import axios from "axios"; 
 
 export default function Courseplus() {
@@ -142,7 +142,7 @@ export default function Courseplus() {
   <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm2 .5v2a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 0-.5-.5h-7a.5.5 0 0 0-.5.5zm0 4v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5zM4.5 9a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zM4 12.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5zM7.5 6a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zM7 9.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5zm.5 2.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zM10 6.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5zm.5 2.5a.5.5 0 0 0-.5.5v4a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-4a.5.5 0 0 0-.5-.5h-1z"/>
 </svg>{topic.name}</div><small>
 <Link to="#" data-bs-toggle="modal" data-bs-target="#staticBackdrop12"><RemoveCircleOutline style={{fontSize:"1.4em",color:"black"}}/></Link>
-  <Link to="#" data-bs-toggle="modal" data-bs-target="#staticBackdrop12"><Plus style={{fontSize:"1.4em",color:"black"}}/></Link>
+  <Link to="#" data-bs-toggle="modal" data-bs-target="#staticBackdrop12"><Add style={{fontSize:"1.4em",color:"black"}}/></Link>
   </small></h1>
         <hr ></hr>
         <div className="list-group list-group-flush container">

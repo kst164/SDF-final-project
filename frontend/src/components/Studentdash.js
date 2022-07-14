@@ -15,21 +15,7 @@ import axios from "axios";
 export default function Studentdash(props) {
   const navigate=useNavigate();
   
-  const [inf,setinf]=useState
-  (
-    [
-      {
-        name:"Maths",
-        id:1234,
-        subtopics:[
-          {
-            name:"3D Geomt",
-            id:123,
-          }
-        ]
-      }
-    ]
-  )
+  const [inf,setinf]=useState([])
   useEffect(() => {
     const fetch = async () => {
       const response = await axios.get("/topics", {

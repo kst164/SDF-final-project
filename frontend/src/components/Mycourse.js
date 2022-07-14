@@ -6,7 +6,8 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
-  Link
+  Link,
+  useParams
 } from "react-router-dom";
 import AddMaterial from './AddMaterial';
 import AddHw from './AddHw.js';
@@ -16,6 +17,7 @@ import AddLecture from './AddLecture.js';
 import FacultyNav from './FacultyNav';
 export default function Mycourse() {
   const [element,setelement]=useState(<AddLecture/>)
+  let params=useParams();
   const [init1,setinit1]=useState("list");
   const [init2,setinit2]=useState("list active");
   const [init3,setinit3]=useState("list");
@@ -32,7 +34,7 @@ export default function Mycourse() {
     <div className="poster my-3">
     <li className="list static">
       <Link to="#" >
-        <span className='maintitle'>Calculus</span>
+        <span className='maintitle'>{params.subtopicname}</span>
       </Link>
     </li>
     </div>

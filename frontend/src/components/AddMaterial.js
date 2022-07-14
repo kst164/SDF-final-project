@@ -9,6 +9,16 @@ import {
   Link
 } from "react-router-dom";
 export default function AddMaterial() {
+  const [linker,setlinker]=useState(
+    {
+      name:"",
+      link:''
+    }
+  )
+  const uploader=()=>
+  {
+
+  }
   return (
     <>
     <div className="perv container">
@@ -25,8 +35,9 @@ export default function AddMaterial() {
         <Link to="#" className="list-group-item "><p className="card-text">Reference book 2</p></Link>
         <Link to="#" className="list-group-item "><p className="card-text">Recorded video</p></Link>
         <div className="input-group mb-3 my-4">
-  <input type="file" className="form-control" id="inputGroupFile02"/>
-  <button type="button" className="btn btn-outline-primary">Upload</button>
+  <input type="text" aria-label="First name" className="form-control" placeholder='Name of the Material' value={linker.name} onChange={(e)=>{setlinker({...linker,name:e.target.value})}}/>
+  <input type="text" aria-label="Last name" className="form-control" placeholder='Link' value={linker.link} onChange={(e)=>{setlinker({...linker,link:e.target.value})}}/>  
+  <button type="button" className="btn btn-outline-primary" onClick={uploader}>Upload</button>
 </div>
         </div>
       </div>
