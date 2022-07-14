@@ -21,19 +21,10 @@ import axios from "axios";
 export default function Courseplus() {
   const [inf,setinf]=useState
   (
-    [
-      {
-        name:"Maths",
-        id:1234,
-        subtopics:[
-          {
-            name:"3D Geomt",
-            id:123,
-          }
-        ]
-      }
-    ]
+    []
   )
+  const [sub,setsub]=useState("");
+  const [parentTopic,setParentTopic]=useState(-1);
   const [create,setcreate]=useState(
     {
       name:"",
@@ -51,25 +42,67 @@ export default function Courseplus() {
       
     });
   }
+  const fetch = async () => {
+    console.log(localStorage.getItem("username"));
+    console.log(localStorage.getItem("password"));
+    const response = await axios.get("/topics", {
+      auth: {
+        username: localStorage.getItem("username"),
+        password: localStorage.getItem("password"),
+      }
+    });
+    console.log("re")
+    console.log(response.status);
+    if (response.status == 200) {
+      console.log(response.data);
+      setinf(response.data);
+    }
+  }
   useEffect(() => {
-    const fetch = async () => {
-      console.log(localStorage.getItem("username"));
-      console.log(localStorage.getItem("password"));
-      const response = await axios.get("/topics", {
+
+    fetch();
+  }, [])
+
+  const createSubtopic = async () => {
+    if (parentTopic == -1) {
+      return;
+    }
+    const response = await axios.post(`/topics/${parentTopic}/subtopics`, {
+      name: sub,
+    }, {
+      auth: {
+        username: localStorage.getItem("username"),
+        password: localStorage.getItem("password"),
+      }
+    });
+  }
+
+  const deleteTopic = async (topicId) => {
+    if (window.confirm("Are you sure?")) {
+      const response = await axios.delete(`/topics/${topicId}`, {
         auth: {
           username: localStorage.getItem("username"),
           password: localStorage.getItem("password"),
         }
       });
-      console.log("re")
-      console.log(response.status);
-      if (response.status == 200) {
-        console.log(response.data);
-        setinf(response.data);
-      }
+      console.log("delete")
+      await fetch();    
     }
-    fetch();
-  }, [])
+    else
+    {
+
+    }
+  }
+  
+  const deleteSubtopic = async (topicId, subtopicId) => {
+    const response = await axios.delete(`/topics/${topicId}/subtopics/${subtopicId}`, {
+      auth: {
+        username: localStorage.getItem("username"),
+        password: localStorage.getItem("password"),
+      }
+    });
+  }
+
   const adder=()=>
   {
     return (
@@ -117,12 +150,12 @@ export default function Courseplus() {
 
 <div class="input-group mb-3 ">
   <span class="input-group-text w-25" id="basic-addon3"><h5 className='my-2'>Name of new subtopic</h5></span>
-  <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3"/>
+  <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" value={sub} onChange={(e)=>{setsub(e.target.value)}}/>
 </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal" >Understood</button>
+        <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal" onClick={createSubtopic} >Create</button>
       </div>
     </div>
   </div>
@@ -141,13 +174,13 @@ export default function Courseplus() {
       <h1 className="card-title d-flex justify-content-between align-items-center"><div><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" className="bi bi-calculator-fill" viewBox="0 0 16 16">
   <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm2 .5v2a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 0-.5-.5h-7a.5.5 0 0 0-.5.5zm0 4v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5zM4.5 9a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zM4 12.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5zM7.5 6a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zM7 9.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5zm.5 2.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zM10 6.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5zm.5 2.5a.5.5 0 0 0-.5.5v4a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-4a.5.5 0 0 0-.5-.5h-1z"/>
 </svg>{topic.name}</div><small>
-<Link to="#" data-bs-toggle="modal" data-bs-target="#staticBackdrop12"><RemoveCircleOutline style={{fontSize:"1.4em",color:"black"}}/></Link>
-  <Link to="#" data-bs-toggle="modal" data-bs-target="#staticBackdrop12"><Add style={{fontSize:"1.4em",color:"black"}}/></Link>
+<Link to="#" onClick={() => deleteTopic(topic.id)}><RemoveCircleOutline style={{fontSize:"1.4em",color:"black"}}/></Link>
+  <Link to="#" data-bs-toggle="modal" data-bs-target="#staticBackdrop12" onClick={() => setParentTopic(topic.id)}><Add style={{fontSize:"1.4em",color:"black"}}/></Link>
   </small></h1>
         <hr ></hr>
         <div className="list-group list-group-flush container">
           {topic.subtopics.map(subtopic => {
-            return <Link to={`/student/subtopic ${subtopic.name}`} className="list-group-item d-flex justify-content-between align-items-center" ><h5 className="mb-1">{subtopic.name}</h5> <small><RemoveCircleOutline /></small></Link>
+            return <div className="list-group-item d-flex justify-content-between align-items-center" ><h5 className="mb-1">{subtopic.name}</h5> <small><Link to="#" onClick={() => deleteSubtopic(topic.id, subtopic.id)}><RemoveCircleOutline  /></Link></small></div>
           })}
         </div>
       </div>

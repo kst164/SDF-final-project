@@ -17,7 +17,7 @@ import {
 import axios from "axios";
 import config from "../config";
 
-axios.defaults.baseURL = "http://192.168.0.211:5000"
+axios.defaults.baseURL = "http://192.168.51.88:5000"
 axios.defaults.validateStatus = (_status) => true;
 
 export default function Login() {
@@ -25,8 +25,8 @@ export default function Login() {
   const [look, setlook] = useState("role");
   const [details,setdetails]=useState(
     {
-      username:"admin@iith.ac.in",
-      password:"123",
+      username:"",
+      password:"",
     }
   );
   const [newuser,setnewuser]=useState(
@@ -89,6 +89,9 @@ export default function Login() {
         username: details.username,
         password: details.password,
       }
+    } else {
+      console.log("auth failed")
+      alert("Authentication failed");
     }
     // console.log(look);
   }
